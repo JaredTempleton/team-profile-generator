@@ -7,6 +7,8 @@ const Engineer = require('./lib/Engineer');
 const inquirer = require('inquirer');
 const fs = require('fs');
 const path = require('path');
+const OUTPUT_DIR = path.resolve(__dirname, 'output');
+const outputPath = path.join(OUTPUT_DIR, 'team-profiles.html');
 
 //make an array for the employees
 const employees = [];
@@ -126,7 +128,7 @@ addIntern = () => {
 }
 
 //initializing questions
-init = () => {
+initialize = () => {
     console.log('------------------------------------\nLets us begin making your team. \nPlease answer the following questions fully and your team will be compiled in the output folder');
     return inquirer.prompt([
         //question prompts for team
@@ -159,3 +161,19 @@ init = () => {
         nextEmployee();
     })
 }
+
+//html generator to create page
+createPage = () => {
+    const buildCards = render(employees);
+    fs.writeFile(outputPath, buildCards, (err) => {
+        if (err) {
+            return console.log(err);
+        }
+        else {
+            return console.log('File Created!')
+        }
+    })
+}
+
+//starts prompts
+initialize();
