@@ -9,6 +9,7 @@ const fs = require('fs');
 const path = require('path');
 const OUTPUT_DIR = path.resolve(__dirname, 'output');
 const outputPath = path.join(OUTPUT_DIR, 'team-profiles.html');
+const render = require('./lib/renderHtml.js')
 
 //make an array for the employees
 const employees = [];
