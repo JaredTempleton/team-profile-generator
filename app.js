@@ -1,7 +1,7 @@
 //Inputs modules from /lib
-const Intern = require('./lib/Intern');
-const Manager = require('./lib/Manager');
-const Engineer = require('./lib/Engineer');
+const Intern = require('./Develop/lib/Intern');
+const Manager = require('./Develop/lib/Manager');
+const Engineer = require('./Develop/lib/Engineer');
 
 //node modules
 const inquirer = require('inquirer');
@@ -9,7 +9,7 @@ const fs = require('fs');
 const path = require('path');
 const OUTPUT_DIR = path.resolve(__dirname, 'output');
 const outputPath = path.join(OUTPUT_DIR, 'team-profiles.html');
-const render = require('./lib/renderHtml.js')
+const render = require('./Develop/lib/renderHtml.js')
 
 //make an array for the employees
 const employees = [];
@@ -81,7 +81,7 @@ addEngineer = () => {
         {
             type: 'input',
             message: 'What is the GitHub of this engineer?',
-            name: 'gitHub'
+            name: 'github'
         }
     ])
     .then((engineerAnswers) => {
@@ -120,8 +120,8 @@ addIntern = () => {
     ])
     .then((internAnswers) => {
         internAnswers.role = 'Intern';
-        const { name, id, email, github, role } = internAnswers;
-        const newintern = new Intern(name, id, email, github, role);
+        const { name, id, email, school, role } = internAnswers;
+        const newintern = new Intern(name, id, email, school, role);
         employees.push(newintern);
         
         addEmployee();
